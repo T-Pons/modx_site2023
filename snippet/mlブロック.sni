@@ -1,0 +1,28 @@
+$langs = isset($langs) ? $langs : "JP" ;
+$retSTR="";
+$flags = explode(" ", $langs );
+
+$menuid=uniqid("ml");
+
+$retSTR='<!-- mlブロックstart -->';
+$retSTR.='<div class="mldiv"><div class="mltab"><span class="sp"></span>'."\n";
+foreach ($flags as $key => $value) {
+    if( isset(${$value}) ){ $img=$value.'+';
+    }else{                  $img=$value.'-'; }
+    $retSTR .= '<label for="'.$menuid.$key.'" ><img src="images/flags/'.$img.'.png"/></label>'."\n" ;
+}
+$retSTR .= '</div>'."\n";
+
+$retSTR2="";
+foreach ($flags as $key => $value) {
+    $retSTR2 .= '<input type="radio" name="'.$menuid.'"  id="'.$menuid.$key.'"' ;
+    if( $key=='0'){ $retSTR2 .= ' checked '; };
+    $retSTR2 .= ' />';
+    $a=str_replace("'", "&#39;", ${$value} );
+    if( isset( ${$value} )){ $retSTR2 .= '<p>'.$a.'</p>'."\n";
+    }else{                   $retSTR2 .= '<p>'.$key.'個目 の言語'.$value.' は設定されていません。</p>'."\n"; }
+}
+$retSTR2 .='</div><!-- mlブロックend -->';
+
+
+return   $retSTR.$retSTR2;
