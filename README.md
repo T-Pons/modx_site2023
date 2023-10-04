@@ -13,3 +13,11 @@ test site fot modx
 便利なんだが、単一リソースだと不安もある。
 最低限のメモ書きは残したい。
 
+## 外部のファイル
+<dl>
+  <dt>CMS textile の perser.php</dt>  <dd>旧版だと textile.phpだった。
+    textile表記を、HTMLにパースできる。新版だと装飾やら色やら、事実上CSSを書き込める。高機能。
+    </dd>
+  <dt>SyntaxHighlighter</dt> <dd>これまた新版だと高機能化。もっとも旧版も残ってて使えるし、
+    cdnなので急に無くなるはずもなし。もう旧版でいいか。 </dd>
+</dl>
