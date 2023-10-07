@@ -1,0 +1,19 @@
+﻿/*
+id  or msgを渡すと、textileでデコードして表示。
+・両方あるとid優先
+・両方ないとエラー
+・textpattanからライブラリ持ってきた。
+*/
+
+if( isset($id)  ){
+    $tx_strings=$modx->getField($field='content', $docid=$id );
+}else if( isset($msg) ){
+    $tx_strings=$msg;
+}else{
+    return " not text ID !!<br>" ;
+};
+
+require_once( MODX_BASE_PATH.'assets/snippets/textile/Parser.php' ) ;
+
+$parser = new \Netcarver\Textile\Parser();
+return $parser->setImages(false)->parse($tx_strings);

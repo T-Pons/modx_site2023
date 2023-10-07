@@ -1,0 +1,26 @@
+if( isset($Loadml) ){
+     return '<p>Alrady loaded ml</p>';
+}else{
+$ml= <<<EOT
+<style type="text/css">
+.mldiv{ padding:0px; margin:0px; border:solid 1px; width:100%;}
+.mldiv div.mltab { width:100%; display: inline-block; text-align: right; 
+ padding:0px 2px 0px 0px; margin:0px; vertical-align:top; }
+.mldiv div.mltab span.sp{ display: inline-block; max-width: 26px;  max-height: 26px; 
+padding:0px; margin: 0px -2px -9px 0px;
+border-top: 26px solid #99cc00; border-left: 26px solid transparent; }
+.mldiv div.mltab label { width: 26px;  height: 26px; line-height: 24px; display: inline-block; 
+  padding:0px; margin: 0px -2px;  text-align: center; background-color: #99cc00;}
+.mldiv input{ vertical-align: middle; display: none; }
+.mldiv input[type="radio"] {  border:none; top:-2px; top:0\9; margin-right:2px;  margin-right: 0\9;  box-sizing: border-box;  padding: 0; }
+.mldiv input:not(:checked) + p { display: none; }
+.mldiv input:checked + ul {	display: inline-block;}
+.mldiv input:checked + ul + ul {display: inline-block;}
+</style>
+EOT;
+
+   $modx->regClientStartupHTMLBlock($ml);
+}
+$Loadml = 'Loaded';
+ // $GLOBALS['Loadjsc3d'] = 'Loaded';
+return ;

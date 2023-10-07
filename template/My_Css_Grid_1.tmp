@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="client-js vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-toc-pinned-enabled vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-zebra-design-disabled vector-animations-ready ve-not-available ext-discussiontools-init-ready vector-feature-page-tools-pinned-disabled"
+    lang="ja" dir="ltr">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <base href="[(site_url)]" />
+    <title> [(site_name)]:[*pagetitle*] </title>
+
+    <link rel="stylesheet" href="[~28~]">
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="[~6~]" />
+
+    <meta name="ResourceLoaderDynamicStyles" content="">
+    <meta name="generator" content="">
+    <meta name="referrer" content="origin">
+    <meta name="referrer" content="origin-when-crossorigin">
+    <meta name="referrer" content="origin-when-cross-origin">
+    <meta name="robots" content="max-image-preview:standard">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=1000">
+    <meta property="og:title" content="[(site_name)]">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="">
+    <link rel="alternate" media="only screen and (max-width: 720px)" href="">
+    <link rel="alternate" type="application/x-wiki" title="編集" href="">
+    <link rel="apple-touch-icon" href="">
+    <link rel="icon" href="">
+    <link rel="search" type="application/opensearchdescription+xml" href="">
+    <link rel="EditURI" type="application/rsd+xml" href="">
+    <link rel="canonical" href="">
+    <link rel="license" href="">
+    <link rel="alternate" type="application/atom+xml" title="WikipediaのAtomフィード" href="">
+    <link rel="dns-prefetch" href="https:" />
+    <link rel="dns-prefetch" href="https:" />
+       
+</head>
+<body><div id="mw-container">
+[*content@31*] <!-- body -->
+<!-- CEO対策で、bodyを最初にする -->
+[*content@29*] <!-- humberger -->
+[*content@30*] <!-- header -->
+[*content@32*] <!-- footer -->
+
+<div class="top_float"> <!-- 上部固定ヘッダー -->
+    <div style="display: block;">
+      <div class="vector-header-start">
+        <a href="" class="mw-logo">
+            <img class="mw-logo-icon" alt="Site URL" src="my_grid_css/Site_url.png" height="75" width="75">
+            <span class="mw-logo-container">
+               <img class="mw-logo-wordmark" alt="mySite   " src=".svg" style="width: 7.5em; height: 1.25em;">
+               <img class="mw-logo-tagline"  alt=""          src=".svg" width="100" height="14" style="width: 6.25em; height: 0.875em;">
+            </span>
+        </a>
+
+        <ul id="mw-head-menu-rt"  style="display: inline-block; list-style: none;" >
+          <li style="list-style: none;"><img src="my_grid_css/icon_youtube.png" alt="" aria-hidden="true" height="75" width="75"></li>
+          <li style="list-style: none;"><img src="my_grid_css/icon_twitter.png" alt="" aria-hidden="true" height="75" width="75"></li>
+          <li onclick="Rmenu_on()"  style="list-style: none;">
+              <img src="my_grid_css/burger_menu.png"  alt="" aria-hidden="true" height="75" width="75"></li>
+          <li onclick="Rmenu_off()" style="list-style: none; visibility:hidden; position: absolute; right:0px;" id="burger_off" >
+              <img src="my_grid_css/burger2_menu.png" alt="" aria-hidden="true" height="75" width="75"></li>
+        </ul>
+      </div>
+    </div>
+</div>
+<div id="right_menu" class="right_float" style="height:80%; padding: 2px; visibility:hidden;">
+    [*content@44*]
+</div>
+
+<script type="text/javascript">
+
+function Rmenu_on(){
+    const b = document.getElementById("burger_off");
+    const r = document.getElementById("right_menu");
+    b.style.visibility ="visible";
+    r.style.visibility ="visible";
+    r.style.height     ="70vh"  ; // height_disp()-200 
+    const dm=document.getElementById("dbgmsg");
+    const dm2=document.getElementById("dbgmsg2");
+    dm.innerHTML    = "Display Hight:" + string( window.innerHeight() ) + ";" ;
+    dm2.textContent = "Display Hight:" + string( window.innerHeight() ) + ";" ;
+    document.getElementById("idButton").value = "Display Hight:" + string( window.innerHeight() ) + ";" ;
+}
+function Rmenu_off(){
+    const b = document.getElementById("burger_off");
+    const r = document.getElementById("right_menu");
+    b.style.visibility ="hidden";
+    r.style.visibility ="hidden";
+}
+
+    $(function() {
+        var topBtn = $('#campaignFix'); 
+        topBtn.hide();
+        $(window).scroll(function () {
+            var wnd_h = $(window).height();
+            var scr_top = $(window).scrollTop();
+            var doc_h = $(document).height();
+            if (scr_top > 100 && scr_top < doc_h - wnd_h - 100) {
+                topBtn.fadeIn();
+            } else {
+                topBtn.fadeOut();
+            }
+        });
+    });
+</script> 
+</body>
+
+</html>
