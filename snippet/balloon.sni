@@ -1,0 +1,43 @@
+/* 
+word pressの jin風、会話セクション生成。
+  [[ballon? &img="iii" &imgname="nnn" &msg="xxx" &align="L" &bg="" &bc="" ]] ' ]] 
+imgが、顔画像。80x80を想定
+imgnameがキャラ名
+msgが、セリフの中身。単なる段落&gt;p&lt;なので、何入れてもOK 
+align が顔が右or左。 "R" か "L" を入れる。デフォ値は"L" 
+bc がバックグラウンド色。 "O" "R" "G" "B" がある。デフォ値は "O" (off color)
+bo がボーダーカラー（＝枠線色）。同じく  "O" "R" "G" "B" がある。デフォ値は "O"
+*/
+
+if( !isset($img)    ) $img      ="./content/media/faces/hituji.jpg";
+if( !isset($imgname)) $imgname  ="-";
+if( !isset($msg)    ) $txt      =" ";
+if( !isset($align)  ) $align    ="L";
+if( !isset($bg)     ) $bg       ="O";
+if( !isset($bc)     ) $bc       ="O";
+
+$out  = '<div class="balloon-box ';
+
+if( $align=="R" )    $out .=  'balloon-right '; 
+else                 $out .=  'balloon-left  ';
+
+if(      $bg =="R" ) $out .= 'balloon-bg_r ';
+else if( $bg =="G" ) $out .= 'balloon-bg_g ';
+else if( $bg =="B" ) $out .= 'balloon-bg_b ';
+else                 $out .= 'balloon-bg_o ';
+
+if(      $bc =="R" ) $out .= 'balloon-bc_r ';
+else if( $bc =="G" ) $out .= 'balloon-bc_g ';
+else if( $bc =="B" ) $out .= 'balloon-bc_b ';
+else                 $out .= 'balloon-bc_o ';
+
+$out .=  'clearfix">
+  <div class="balloon-icon">
+    <img src="' . $img .'" ><br>
+    <div class="icon-name">' . $imgname . '</div></div><div class="balloon-serif">
+    <div class="balloon-content">' . $msg . '</div></div></div>
+';
+
+
+return $out ;
+/* EOT*/
