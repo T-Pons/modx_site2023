@@ -1,0 +1,16 @@
+/*
+むりやりredirectさせるスニペット
+*/
+
+$sID=isset($id) ? $id : 1;
+
+$modx->sendRedirect( MODX_BASE_URL .'/'.$sID.'/'  );
+
+/*
+$modx->sendRedirect()
+sendRedirect($url, $count_attempts= 0, $type= '', $responseCode= '')
+*/
+
+$ret='<p> please wait  redirect [' .$sID. '] </p> ' ; 
+
+return $ret;
