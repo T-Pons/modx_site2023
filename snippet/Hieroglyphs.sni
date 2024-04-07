@@ -1,0 +1,32 @@
+/*
+ フォント利用のテスト。
+ ヒエログリフを本気で使うわけじゃないぞ。
+ 各種web Fontsを使えるのが判ったのでOK
+*/
+if( isset($LoadHieroglyphs) ){
+     return '<p>Alrady loaded Hieroglyphs</p>';
+}else{
+   $HieroglyphsSRC="
+<style>
+/*
+ * Noto Sans Egyptian Hieroglyphs (Egyptian Hieroglyphs) http://www.google.com/fonts/earlyaccess
+ */
+@font-face {
+  font-family: 'Noto Sans Egyptian Hieroglyphs';
+  font-style: normal;
+  font-weight: 400;
+  src: url(http://fonts.gstatic.com/ea/notosansegyptianhieroglyphs/v1/NotoSansEgyptianHieroglyphs-Regular.eot);
+  src: url(http://fonts.gstatic.com/ea/notosansegyptianhieroglyphs/v1/NotoSansEgyptianHieroglyphs-Regular.eot#iefix) format('embedded-opentype'),
+       url(http://fonts.gstatic.com/ea/notosansegyptianhieroglyphs/v1/NotoSansEgyptianHieroglyphs-Regular.woff2) format('woff2'),
+       url(http://fonts.gstatic.com/ea/notosansegyptianhieroglyphs/v1/NotoSansEgyptianHieroglyphs-Regular.woff) format('woff'),
+       url(http://fonts.gstatic.com/ea/notosansegyptianhieroglyphs/v1/NotoSansEgyptianHieroglyphs-Regular.ttf) format('truetype');
+}
+</style>
+";
+   $modx->regClientStartupHTMLBlock($HieroglyphsSRC);
+}
+
+ $LoadHieroglyphs='Loaded';
+ // $GLOBALS['$LoadHieroglyphs'] = 'Loaded';
+ return ;
+// EOT
