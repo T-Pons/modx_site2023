@@ -1,0 +1,34 @@
+/*
+ 高機能版の google map iframe
+ とりあえず、ズームとサイズは指定できないと、仕事にならん。
+ z=23とか、縮尺が小さい（表示が大きい）地図は、場所によって無いのでせいぜい上限20かな？
+ 仕様例は [[g_map?latitude='36.25728007632073, 139.990950397259'&width=400&height=400&zoom=17]] みたいな感じ。
+*/
+if( isset($width) ){
+ $width ='width="' .  $width . '" ';
+}else{
+ $width = 'width="600" ';
+}
+
+if( isset($height) ){
+ $height='height="' .  $height . '" ';
+}else{
+ $height = 'height="480" ';
+}
+
+if( isset($zoom) ){
+ $zoom='z=' .  $zoom ;
+}else{
+ $zoom = 'z=12';
+}
+
+if( isset($latitude) ){
+/* don't acction */ ;
+}else{
+ $latitude = '@35.697683,139.4132567';
+}
+
+$output='<iframe ' .  $width .  $height . 'src="https://maps.google.co.jp/maps?ll=' . $latitude . '&output=embed&' . $zoom . '"></iframe> ';
+
+return ' '.$output;
+/* */
