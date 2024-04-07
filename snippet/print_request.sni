@@ -1,0 +1,11 @@
+/*
+ debug 表示用 パスワードとか流出するため、瞬間だけ利用すべし。公開ページでの利用はNG
+*/
+
+$a = '<pre>' . 
+     var_dump($_COOKIE)  .
+  /* var_dump($_SERVER)  . */
+  /* print_r($_REQUEST,1)  . */ 
+     '</pre>' ;
+
+return  $a  ;
