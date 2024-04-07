@@ -1,0 +1,20 @@
+/*
+ debug 表示用 パスワードとか流出するため、瞬間だけ利用すべし。公開ページでの利用はNG
+*/
+
+$a = '
+<style>
+.phpext { border: 1px solid gray;}
+.phpext th, .phpext td { border: 1px solid gray;}
+</style>
+<table class="phpext">';
+
+$ext = get_loaded_extensions();
+
+foreach ( $ext as $i => $value) {
+    $a.= "<tr><td>".$i."</td><td>".$ext[$i]."</td></tr>" ;
+}
+
+$a .="</table>";
+
+return  $a  ;
