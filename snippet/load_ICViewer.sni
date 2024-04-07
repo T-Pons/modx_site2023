@@ -1,0 +1,12 @@
+/* Load image-compare-viewer */
+if( isset($LoadICViewer) ){
+     return '<p>Alrady loaded MathJAX</p>';
+}else{
+   $ICViewerSRC='<script src="https://unpkg.com/image-compare-viewer@1.5.0/dist/image-compare-viewer.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/image-compare-viewer/dist/image-compare-viewer.min.css">';
+   $modx->regClientStartupHTMLBlock($ICViewerSRC);
+}
+
+$LoadICViewer='Loaded';
+ // $GLOBALS['LoadICViewer'] = 'Loaded';
+return ;
