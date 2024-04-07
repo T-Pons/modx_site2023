@@ -1,0 +1,11 @@
+/*
+ 現状では使う必要ないスニペット
+ [*content@id*] って標準機能があるため。
+ まぁスニペットの自作の練習にはなったかな？
+*/
+$sID=isset($id) ? $id : 7;
+/*return print_r( $sID ,true); */
+$content=$modx->getField($field='content', $docid=$sID);
+/* return print_r( $content ,true)  ;*/
+
+return $content;
