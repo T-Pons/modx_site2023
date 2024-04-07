@@ -1,0 +1,9 @@
+/* 
+HTMLの特殊文字を変換する
+[[esc_html? &txt='<html>' ]]
+*/
+
+if( !isset($txt) ) $txt="";
+
+$safe_txt = htmlentities($txt, ENT_QUOTES);
+return $safe_txt ;
