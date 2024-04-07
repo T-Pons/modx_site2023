@@ -1,0 +1,36 @@
+/*
+ image-compare-viewer 実行ファイル。 <body>最後に追加。</body>直前？
+ パラメーターは img1="画像URL1" img2="画像URL2"
+ 各種設定は .image-compareを付けたエレメントに、 icv_cfg="設定" をする
+*/
+
+if( isset($LoadExeICViewer) ){
+     return '<p>Alrady loaded MathJAX</p>';
+}
+
+$ICViewerSRC='
+<script>
+  let imageCompareViewers = document.querySelectorAll(".image-compare");
+  imageCompareViewers.forEach((element, i) => {
+      console.log("#No#");console.log(i);
+      let json=element.getAttribute("icv_cfg");
+      console.log("#json#");console.log(json);
+      let config = new Object();
+  try{
+        config = JSON.parse(json);
+        console.log("#json OK#");console.log(config); 
+  } catch (error) {
+        console.log("#json NG#");console.log(error);
+  }
+　　　 new ImageCompare(element, config ).mount(); 
+  });
+</script>
+';
+
+$modx->regClientHTMLBlock($ICViewerSRC);
+
+$LoadExEICViewer='Loaded'; // $GLOBALS['LoadExEICViewer'] = 'Loaded';
+return ;
+/*
+ <head>ブロック最後に追加する regClientStartupHTMLBlock($ICViewerSRC);ではなくてregClientHTMLBlock利用
+*/
