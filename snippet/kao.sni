@@ -1,0 +1,9 @@
+/* 
+<img src="./content/media/emotion/anim_ase.gif" >　みたいのを短縮入力
+*/
+
+if( !isset($face) ) $face="ase";
+
+$out='<img src="./content/media/emotion/anim_' . $face . '.gif" >' ;
+
+return $out ;
