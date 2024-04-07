@@ -1,0 +1,42 @@
+/*
+ blog 内部コンテンツ用スニペット。
+ URIで http://tachikawa413.starfree.jp/modx/152 とかで呼ばれたら
+ http://tachikawa413.starfree.jp/modx/53?c=152 とかでredirectする。
+ むりやりredirectさせるスニペット
+*/
+$id       = $modx->documentObject['id'];
+$host     = $_SERVER['HTTP_HOST'];
+$request  = $_SERVER['REQUEST_URI'];
+$request2 = $request;
+
+$acc_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $host . $request2;
+$path_parts = pathinfo($acc_url);
+
+/*
+ $path_parts['dirname']
+ $path_parts['basename']
+ $path_parts['extension']
+ $path_parts['filename']
+*/
+
+preg_match('+(.*)(/modx)(/*)([0-9]*)([.].*)+' , $acc_url  , $exout ); /*, PREG_PATTERN_ORDER */
+/* return print_r($exout); */
+
+if( $exout[2] != '53' ){
+  /* $request2 = str_ireplace( '/modx/' , '/modx/53&c='. $id , $request); */
+  $request2 = $exout[2] . '/53?c=' . $exout[4];
+}
+
+
+$acc_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $host . $request2;
+
+$dbgmsg  = '<p>'.$acc_url . '<br><br>' ;
+$dbgmsg .= '$_SERVER[HTTP_HOST]   is ' . $host    . '<br>';
+$dbgmsg .= '$_SERVER[REQUEST_URI] is ' . $request . '→' . $request2 . '<br></p>';
+
+return $dbgmsg; 
+
+/* modx->sendRedirect( $acc_url ); */
+
+$ret='<p> please wait  redirect [' .$sID. '] </p> ' ; 
+return $ret;
