@@ -1,0 +1,46 @@
+/*
+ simplepieを利用した rssの取得と表示
+ rss='rssURL'
+ 'assets/snippets/simplepie/autoloader.php';
+*/
+$out='';
+$GETrss = isset($rss) ? $rss : 'xxyyzz';
+if($GETrss === 'xxyyzz' ){ return "<h1>not data</h1>"; }
+
+date_default_timezone_set("Asia/Tokyo");
+require_once('assets/snippets/simplepie/autoloader.php');
+
+$feed = new SimplePie();
+$feed->enable_cache(false); //キャッシュ機能はオフで使う
+$feed->set_feed_url($GETrss);
+//$out .= '<p> read rss url is ' .$GETrss . '</p>' ; 
+$feed->handle_content_type(); // 'text/html' ?
+$success = $feed->init();
+
+if ($success){
+//  $out .='$feed->init success';
+//  $out .= $feed->get_item_quantity();  //
+//return $out;
+
+  foreach($feed->get_items() as $item) {
+    $out .= '<hr><div style="border: 1px splid; font-size: x-small;">';
+    $out .= '<p>'.$item->get_date('Y-m-d H:i:s')."</p>"; //記事投稿時刻
+    $out .= '<p>'.$item->get_feed()->get_title()."</p>"; //サイトタイトル
+    $out .= '<p>'.$item->get_title()."</p>";             //記事タイトル
+    $out .= '<p>'.$item->get_link()."</p>";              //記事URL
+    //$out .= '<p>'.mb_convert_encoding($item->get_description(),'UTF-8', 'HTML-ENTITIES')."</p>"; //記事ディスクリプション
+
+    //foreach ($item->get_categories() as $category){ //記事カテゴリ
+    //    $out .= $category->get_label()."\n";
+    //};
+    $out .= "</div>";
+  };
+}else{
+  console.log('$feed->init NO! success' );
+  return " ";
+  $out .= $feed->error();
+}
+
+return $out;
+
+// EOT
