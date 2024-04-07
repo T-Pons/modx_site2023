@@ -1,0 +1,21 @@
+/* 
+ zoomify free ver5 準備
+ headerに要素を追加する。
+*/
+
+if( isset($Load_zoomify) ){
+     return '<p>Alrady loaded zoomify</p>';
+}else{
+
+$ZoomSRC='
+<script type="text/javascript" src="http://tachikawa413.starfree.jp/CDN/ZoomifyImageViewerFree-min.js"></script>
+<style type="text/css"> #myContainer { width: 900px; height: 550px } </style>
+<script type="text/javascript"> Z.showImage("myContainer", "http://tachikawa413.starfree.jp/CDN/ZoomifyImageExample"); </script> 
+';
+
+  $Load_zoomify='Loaded';  // $GLOBALS['Load_zoomify'] = 'Loaded';
+  $modx->regClientStartupHTMLBlock($ZoomSRC) ;
+
+  return  ;
+};
+
