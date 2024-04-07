@@ -1,0 +1,32 @@
+/*
+ 画像をdir単位で全表示
+ 旧サイト製ではない！ 残ってなくてでっちあげた。
+*/
+$sPATH=isset($URL) ? $URL : "content/images/" ;
+/*return print_r( $sPATH ,true); */
+
+$ret=""; /* $sPATH */
+$file_num=0;
+
+if(!is_dir($sPATH)){
+ $ret .= $sPATH . " is not DIR" . __DIR__ ;
+ return $ret;
+}
+$ret .= '<div class="gallary_box">';
+if( $dirr = opendir($sPATH) ) {
+    while( ($filename = readdir($dirr)) !== false) {
+        $fullfn = $sPATH . $filename ;
+        /* $ret .= "filename:" . $filename . "- filetype:" . "<br>\n" ; */ /* filetype( $fullfn ) . */ 
+        if ($entry == "." || $entry == "..") { continue; };
+        $file_num++;
+        if(@getimagesize($fullfn)){
+              $ret .= '<div class="gallary_img"><p>' . $fullfn . '</p><div><img src="' . $fullfn . '"></div></div>'; 
+        }else{
+        };
+    }
+    closedir($dirr);
+}else{
+}
+$ret .= '<p></p></div>';
+return $ret;
+/* --EOT-- */
