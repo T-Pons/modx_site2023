@@ -1,0 +1,19 @@
+/* 
+ resize box iframe  。
+・パラメーターは url のみ。デフォルトで""が入る。
+・firefox対策で、iframe自体には resizeつけてない
+*/
+
+if( isset($url) ){
+    $linkurl=$url;
+}else{
+     $linkurl='' ;
+};
+
+$head_text='
+<p style="overflow: hidden; resize:both; width: 400px; height:260px ; border: 3px solid; padding: 3px 3px 1px -9px ;">
+<iframe src="' . $linkurl . '"  style="width:100%; height:100%; min-width:200px; min-height:200px; "></iframe></p>
+';
+
+
+return ''.$head_text ;
