@@ -1,0 +1,37 @@
+/*
+ 旧作の csvデータの表体裁 表示
+ id='No'
+*/
+
+$idGET = isset($id) ? $id : 'xx';
+if($idGET === 'xx' ){ return "<h1>not data</h1>";}
+
+$styleGET = isset($style) ? $style : '' ;
+$cellGET = isset($cell) ? $cell : '' ;
+$a = $modx->getDocumentObject($method='id', $identifier=$idGET);
+
+// 改行コード置換用配列を作成しておく
+$allcr = array("\r\n", "\n\r","\r","\a" ); 
+// 改行コードを統一
+
+$a = str_replace($allcr, "\n", $a);
+$data = explode( "\n" , $a['content']  );
+$cnt = count( $data );
+// return "<h2> id =" . $idGET . " : cnt=" .$cnt . " : data[0]= " . $data[0] . "</h2>" ;
+$csvout = '<table '. $styleGET .' >';
+for( $i=0;$i<$cnt;$i++ ){
+  $csvlines = $data[$i];
+  if($csvlines[0] == '#' ) continue;
+  if($csvlines[0] == '!' ){
+    $csv=explode(',' , substr($csvlines,1) ); 
+    $line='<tr><th '.$cellGET.'>'.implode('</th><th '.$cellGET.'>',$csv).'</th></tr>';
+    $csvout=$csvout.$line;
+  }else{
+    $csv=explode(',' , $csvlines); 
+    $line='<tr><td '.$cellGET.'>'.implode('</td><td '.$cellGET.'>',$csv).'</td></tr>';
+    $csvout=$csvout.$line;
+  }
+}
+ 
+return $csvout.'</table>';
+// EOT
