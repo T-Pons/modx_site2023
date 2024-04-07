@@ -1,0 +1,46 @@
+/* 
+ OGP Open Graph Protocol に基づいて、headerに要素を追加する。
+ Templateのヘッダ部分に埋め込んでの利用を想定。
+ meta社facebookは、headの頭1MB以内に無いとまともに動作しない仕様があるため、（しかも、資料やVerによって違う！）
+ regClientStartupHTMLBlockでの出力は使えない(javascriptなど読み込むと、headerサイズが増えがち。)
+
+*/
+if( isset($Load_OGP) ){
+     return '<p>Alrady loaded OGP</p>';
+}else{
+  $img_url =  $modx->getField('blog_image');
+  if( empty( $img_url )  ){
+    $img_url = $modx->config['site_url'] . "content/images/No_Image_Icon.jpg";
+  }else{
+    $img_url = $modx->config['site_url'] . $img_url;
+  };
+
+$acc_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+$OGPSRC='
+<meta property="fb:app_id"      content="848083580116948" />
+<meta property="og:type"        content="article" />
+<meta property="og:locale"      content="ja_JP" >
+<meta property="og:site_name"   content="' . $modx->config['site_name']     . '" />
+<meta property="og:title"       content="' . $modx->getField('pagetitle')   . '" />
+<meta property="og:image"       content="' . $img_url                       . '" />
+<meta property="og:url"         content="' . $acc_url                       . '" />
+<meta property="og:description" content="' . $modx->getField('description') . '" />
+
+<meta name="twitter:card"          content="summary" />
+<meta name="twitter:site"          content="' . $modx->config['site_name']     . '" />
+<meta name="twitter:title"         content="' . $modx->getField('pagetitle')   . '" />
+<meta name="twitter:description"   content="' . $modx->getField('description') . '" />
+<meta name="twitter:image"         content="' . $img_url                       . '" />
+<meta name="twitter:player"        content="@T_Pons_" />
+<meta name="twitter:player:width"  content="560" />
+<meta name="twitter:player:height" content="315" />
+';
+
+  $Load_OGP='Loaded';  // $GLOBALS['Load_OGP'] = 'Loaded';
+  return ' ' . $OGPSRC ;
+};
+
+/*
+ $modx->regClientStartupHTMLBlock(-) 利用してはダメ。header末尾になる。$OGPSRC
+*/
