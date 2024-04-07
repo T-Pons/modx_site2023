@@ -1,0 +1,22 @@
+/* */
+$sID=isset($id) ? $id : 7;
+$itpl=isset($tpl) ? $tpl : '<p><a href="[~' . $sID . '~]"> [+ypTitle+] </a> [+ypId+] [+ypCreatedon+] [+ypEditedon+] [+ypLtitle+]</p>' ;
+
+$placeholders = array();
+$placeholders['ypId']       = $sID;
+$placeholders['ypTitle']    = $modx->getField($field='pagetitle'  , $docid=$sID );
+$placeholders['ypLtitle']   = $modx->getField($field='longtitle'  , $docid=$sID );
+$placeholders['ypCreatedon']= date('Y/m/d', $modx->getField($field='createdon'  , $docid=$sID ) );
+$placeholders['ypEditedon'] = date('Y/m/d', $modx->getField($field='editedon'   , $docid=$sID ) );
+$placeholders['ypPubdate']  = $modx->getField($field='pub_date'   , $docid=$sID );
+ 
+/* render $itpl → $output */
+/*foreach ($placeholders  as $key => $value) { echo "$key = $value\n";} */
+
+$output = str_replace( '[+ypId+]'       , $placeholders['ypId']        , $itpl );
+$output = str_replace( '[+ypTitle+]'    , $placeholders['ypTitle']     , $output );
+$output = str_replace( '[+ypLtitle+]'   , $placeholders['ypLtitle']    , $output );
+$output = str_replace( '[+ypCreatedon+]', $placeholders['ypCreatedon'] , $output );
+$output = str_replace( '[+ypEditedon+]' , $placeholders['ypEditedon']  , $output );
+$output = str_replace( '[+ypPubdate+]'  , $placeholders['ypPubdate']   , $output );
+return $output;
