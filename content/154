@@ -1,0 +1,37 @@
+2024_04_10 小山向野運動公園
+blogコンテンツの例。未完成だがバックアップとして。
+直表示禁止＋touchシリーズ、絶対動作させないマン。
+(公開時最初だけ、表示させてtouchするけど)
+
+概要の扱いと[[H2]]は、変更予定。
+
+[[blog_safe]]
+[[H2]]
+
+<!--@IGNORE:BEGIN-->
+<p>touch_createdon  test <br></p>
+ [-[blog_safe]-]
+ [-[touch_createdon?date='2008/02/10 18:30:10']-] 
+ [-[touch_publishedon?date='2008/03/20 18:30:10']-]
+ [-[touch_editedon?date='2008/04/30 18:30:10']-]
+<!--@IGNORE:END-->
+
+<p>試験用の日記<br></p>
+
+[[Textile? &msg=' 
+階層の一番浅い所に配置
+
+h3. 写真の説明とか
+
+下は1600pxの写真。これでも解像度下げてるのね。
+
+散歩ついでに写真。
+
+']]
+
+<span style="text-align:center; color:white;">
+<p style="display: inline-block; border: 1px solid black;">ガスり中 
+<img src="https://lh3.googleusercontent.com/pw/AP1GczPjAG57nbKt15WYwz3whmLKhrWuWlIS5rjdb7wRaukWXnXiAVPQAir7M8LDqv9g0HTC6NXHRXzQRkOWJNKVATjNPV87wnbAsWVrbmoc01X5-gTDXFY=w1600-h1200"  ></p>
+</span>
+
+<br>
