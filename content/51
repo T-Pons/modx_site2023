@@ -1,0 +1,48 @@
+<!--
+blogの表示実体。
+画面デザインはここで行って、動作は [[miniBlog_content]]が行ってる。
+右列は、現状 カレンダー/ページ/カテゴリ一覧。 参考にしたfreoでは、著者:ライター 欄があったが、不要かな？
+動画とか切り抜きなら、テンプレートが欲しいかも。
+もちろん変更はあり。
+-->
+<div class="contain-content" style="width:100%;">
+<div style="float: left; width:calc(100% - 210px) ; "> <!-- 左 flex grow で自動伸び縮み style="float: left; flex-grow: 1; overflow: auto; width:100%;margin-right: 220px;" -->
+<hr style="width:100%;">
+<h2>Blogページ</h2>
+<hr>
+[[miniBlog_content]] <br>
+<hr>
+&lbrack;+mb_month+&rbrack; = [+mb_month+]
+<hr>
+&lbrack;+mb_dbgmsg+&rbrack; = [+mb_dbgmsg+]
+<hr>
+[**]
+*createdon@59* [*createdon@59*]   <br>
+*publishedon@59* [*publishedon@59*] <br>
+*editedon@59* [*editedon@59*]<br>
+<hr>
+<a href="[~59~]"> 10/26 </a> <br>
+<hr>
+</div><!-- 左=コンテンツ。メニューじゃない部分 END-->
+
+<style>
+div#mb_util {  float: right;  width: 200px;  margin-left: 10px;  margin-bottom: 20px;}
+div#mb_util h2 {  display: none;}
+div#mb_util div.mb_util {  margin: 15px 0px;  padding-bottom: 10px;  background-color: rgb(238, 238, 238);}
+ ul.mb_cal { border: solid 1px; display: flex; justify-content: space-between; padding: 0px; margin: 0px; margin-right: 29px;}
+ li.mb_cal { list-style: none; } /*border: solid 1px;*/
+
+div#mb_util div.mb_util table.mb_cal { border: solid 1px; };
+div#mb_util div.mb_util table.mb_cal tr td span.satday { color: #2222CC;}
+div#mb_util div.mb_util table.mb_cal tr td span.sunday { color: #CC2222;}
+div#mb_util div.mb_util table.mb_cal tr td span.day {    color: #222222;}
+
+</style>
+
+<div id="mb_util"><!-- 右メニュー Start-->
+  <h2>ユーティリティ</h2>
+[[print_cal]]
+[[print_page_dummy]]
+[[print_cat_dummy]]
+</div><!-- 右メニュー END-->
+</div>
