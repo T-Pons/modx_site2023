@@ -1,1 +1,102 @@
-aa
+[[load_ICViewer]]
+
+[[H2]]
+
+<H3 class="blog">2画像を切り替えて表示する</H3>
+
+<p>
+2画像を切り替えて表示する<br>
+比較用画像 viewer<br>
+おなじみのヘッダ追加だけで動作するのが良い。<br>
+</p>
+
+<h4 class="blog">{controlColor: "#4a5568", controlShadow: false, startingPoint: 75, showLabels: true, } </h4>
+
+<div class="image-compare shadow-md rounded mb-16" style="width: 350px; height: 250px; object-fit: fill;" >
+   <img src="https://image-compare-viewer.netlify.app/public/before-3.jpg" alt="" style="width: 350px; height: 250px; object-fit: fill;" />
+   <img src="https://image-compare-viewer.netlify.app/public/after-3.jpg"  alt="" style="width: 350px; height: 250px; object-fit: fill;" />
+</div>
+
+<h4 class="blog"> {addCircle: true, verticalMode: true }</h4>
+<div class="image-compare shadow-lg rounded"  style="width: 300px; height: 200px; object-fit: fill;" >
+   <img src="https://image-compare-viewer.netlify.app//public/before-1.jpg" alt="" style="width: 300px; height: 200px; object-fit: fill;" />
+   <img src="https://image-compare-viewer.netlify.app//public/after-1.jpg"  alt="" style="width: 300px; height: 200px; object-fit: fill;" />
+</div>
+
+<h4 class="blog"> {} </h4>
+<div class="image-compare shadow-lg rounded mb-12"                                        style="width: 300px; height: 200px; object-fit: fill;">
+    <img src="https://image-compare-viewer.netlify.app/public/interior-clay.jpg"   alt="" style="width: 300px; height: 200px; object-fit: fill;" />
+    <img src="https://image-compare-viewer.netlify.app/public/interior-render.jpg" alt="" style="width: 300px; height: 200px; object-fit: fill;" />
+</div>
+
+<h4 class="blog">{controlColor: "#73c781", controlShadow: false, addCircle: true,    addCircleBlur: true}</h4>
+<div class="image-compare shadow-lg rounded mb-12">
+    <img src="https://image-compare-viewer.netlify.app/public/before-2.jpg" alt="" />
+    <img src="https://image-compare-viewer.netlify.app/public/after-2.jpg" alt="" />
+</div>
+
+<h4 class="blog"> showLabels: true </h4>
+<p>
+{   showLabels: true,
+            labelOptions: { before: "Clay", after: "Final render", onHover: false, },
+            controlShadow: false,controlColor: "#FFFFFF",},
+</p>
+
+<div class="image-compare shadow-lg rounded mb-12" >
+    <img src="https://image-compare-viewer.netlify.app/public/before-2.jpg" alt="" />
+    <img src="https://image-compare-viewer.netlify.app/public/after-2.jpg" alt="" />
+</div>
+
+<h4 class="blog"> {smoothing: false,  controlShadow: false,} </h4>
+<div class="image-compare shadow-lg rounded mb-12" >
+    <img src="https://image-compare-viewer.netlify.app/public/before-9.jpg" alt="" />
+    <img src="https://image-compare-viewer.netlify.app/public/after-9.jpg" alt="" />
+</div>
+
+<h4 class="blog">smoothingAmount: 300, controlShadow: false,  </h4>   
+<div class="image-compare shadow-lg rounded mb-12" >
+    <img src="https://image-compare-viewer.netlify.app/public/before-6.jpg" alt="" />
+    <img src="https://image-compare-viewer.netlify.app/public/after-6.jpg" alt="" />
+</div>
+
+<h4 class="blog">   {hoverStart: true,  controlShadow: false,addCircle: true,}, </h4>
+<div class="image-compare shadow-lg rounded mb-12"  >
+    <img src="https://image-compare-viewer.netlify.app/public/before-7.jpg" alt="" />
+    <img src="https://image-compare-viewer.netlify.app/public/after-7.jpg"  alt="" />
+</div>
+
+<h4 class="blog">  自分画像。巨大＋縦 {verticalMode: true,  controlShadow: false,} </h4> 
+
+<!-- 画像AとB -->
+<div class="image-compare"                                        style="width: 300px; height: 200px; object-fit: fill;" >
+  <img src="content/images/full/P_20231020_093008.jpg"     alt="" style="width: 300px; height: 200px; object-fit: fill;" />
+  <img src="content/images/full/P_20231020_093008-BW.jpg"  alt="" style="width: 300px; height: 200px; object-fit: fill;" />
+</div>
+
+
+<script>
+let imageCompareViewers = document.querySelectorAll(".image-compare");
+let configs = [
+      {controlColor: "#4a5568", controlShadow: false, startingPoint: 75, showLabels: true, },
+      {addCircle: true, verticalMode: true },
+      {},
+      {controlColor: "#73c781", controlShadow: false, addCircle: true,    addCircleBlur: true, },
+      {showLabels: true,
+            labelOptions: { before: "Clay", after: "Final render", onHover: false, },
+       controlShadow: false,controlColor: "#FFFFFF", 
+      },
+      {smoothing: false,  controlShadow: false,},
+      {smoothingAmount: 300, controlShadow: false, },
+      {hoverStart: true,  controlShadow: false,addCircle: true,},
+      {verticalMode: true,  controlShadow: false, showLabels: true,
+        labelOptions: { before: "カラー表示", after: "白黒＝グレースケール", onHover: false, },
+      },
+      {startingPoint: 75,  controlShadow: false,},
+      {fluidMode: true,  controlShadow: false,},
+      {addCircle: true,  verticalMode: true },
+    ];
+    
+imageCompareViewers.forEach((element, i) => { new ImageCompare(element, configs[i]).mount();  });
+
+</script>
+
