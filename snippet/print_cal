@@ -1,0 +1,178 @@
+/*
+ blog 内部コンテンツ用スニペット。
+ カレンダーを表示する。
+ 表示日時は、プレースホルダ利用。
+*/
+
+/*  日付より前のコンテンツを探す return id なければ 0 */
+function search_pcon($cal, &$msgstr)
+{ 
+  global $modx;
+
+  $strqu = "SELECT id ,createdon FROM modx_site_content WHERE createdon < UNIX_TIMESTAMP('" . $cal->format('Y-m-d') . " 00:00:00')  ORDER BY createdon desc ; ";  /* 古い日付全部見る！ 順序は新しい順 */
+  $query = $modx->db->query($strqu);
+
+  while($row = $modx->db->getRow($query) ){  /* blogかどうか調べる 仮で親に53あるか無いかでベタ書き */
+    $id = $row['id'];
+    $plist=$modx->getParentIds($id);
+    if( in_array(53, $plist) ){ 
+       $cal->setTimestamp( $row['createdon'] );   
+       $msgstr=$cal->format("Y/m");
+       return $id;
+    }
+  }
+  return 0; /* 一個もなければ return 0 */
+}
+/*  日付より後のコンテンツを探す return id なければ 0 */
+function search_acon($cal , &$msgstr)
+{ 
+  global $modx;
+
+  $strqu = "SELECT id ,createdon FROM modx_site_content WHERE createdon > UNIX_TIMESTAMP('" . $cal->format('Y-m-d') . " 00:00:00')   ORDER BY createdon asc ; "; /* 新しい側 日付全部見る！ 順序は古いの先 */
+  $query = $modx->db->query($strqu);
+
+  while($row = $modx->db->getRow($query) ){ /* blogかどうか調べる 仮で親に53あるか無いかでベタ書き */
+    $id = $row['id'] ;
+    $plist=$modx->getParentIds($id);
+    if( in_array(53, $plist) ){
+       $cal->setTimestamp( $row['createdon'] );   
+       $msgstr=$cal->format("Y/m");
+       return $id;
+    }
+  }
+  return 0; /* 一個もなければ return 0 */
+}
+
+/*  内部関数 check_con($cal, &$id , &$lmsg)
+ カレンダー内部の、一日分。コンテンツがあるか無いか確認。
+ なければ "<td><span class="day">$day</span></td>"
+ あったら "<td><a href="リンク"><span class="day">$day</span></a></td>"
+ を出力
+*/
+function check_con($cal, &$id , &$lmsg)
+{ 
+  global $modx;
+
+  $lmsg .="&lbrack; day:" .$cal->format('d'). " &rbrack;";
+
+  $strqu = "SELECT id FROM modx_site_content WHERE createdon BETWEEN UNIX_TIMESTAMP('" . $cal->format('Y-m-d') . " 00:00:00') AND UNIX_TIMESTAMP('" . $cal->format('Y-m-d'). " 23:59:59') " ; 
+  $query = $modx->db->query($strqu);
+  $idnum = 0 ;
+
+  while($row = $modx->db->getRow($query) ){
+    $id = $row['id'] ;
+    $plist="";
+    $plist=$modx->getParentIds($id);
+    $lmsg .= "{" . print_r($plist,true) . "}";
+    if( in_array(53, $plist) ){  /* コンテンツ、 1個あったっらreturn だな*/
+      $idnum++;
+      $lmsg.="&lbrack;" .$idnum . ":" . $id . "&rbrack;";
+      return $idnum;
+    }
+  }
+  $lmsg.="&lbrack; 0 &rbrack;";
+  return 0;
+}
+
+/*  内部関数 weeker(DateTime,day)
+    カレンダーの中身の表示。 曜日で色を変える/ブログ記事が無ければ日付、あればリンク付き日付（check_con利用）の出力
+*/
+function weeker($cal, &$lmsg)
+{
+  global $modx;
+  $id=0;
+  if( check_con($cal,$id,$lmsg) > 0 ){ /* もしコンテンツが在ったら */
+   $a_pre='<a href="http://tachikawa413.starfree.jp/modx/53?V=' . $id . '">';
+   $a_pos='</a>';
+  }else{
+   $a_pre='';
+   $a_pos='';
+  }
+  switch( $cal->format("w") ){
+  case 0: /* 日曜*/
+    return '<td>'.$a_pre.'<span class="sunday">' . $cal->format("d") . '</span>'.$a_pos.'</td>'."\n";
+  case 6:
+    return '<td>'.$a_pre.'<span class="satday">' . $cal->format("d") . '</span>'.$a_pos.'</td>'."\n";
+  default:
+    return '<td>'.$a_pre.'<span class="day">'    . $cal->format("d") . '</span>'.$a_pos.'</td>'."\n";
+  }
+}
+
+/*
+  本体
+  カレンダーの中身の表示。 
+*/
+$cal  = new DateTime( $modx->getPlaceholder('mb_month') . '/01' ); /* 表示用 日付。 インクリメントしながら使う  最後に次月用で利用 */
+$cal2 = new DateTime( $cal->format("Y/m/d") );                     /* 先月用リンク  */
+$cal3 = new DateTime( $cal->format("Y/m/d") );                     /* 先記事用リンク  */
+$cal4 = new DateTime( $cal->format("Y/m/d") );                     /* 次記事用リンク  */
+
+$cY=$cal->format("Y");
+$cM=$cal->format("m");
+$cD="1";
+$cW=$cal->format("w");  /* w  曜日。数値。0=日曜 6=土曜*/
+
+$lmsg="";
+$msg='
+<div class="mb_util">
+<h3>' . $cal->format("Y") . '年'. $cal->format("m") . '月</h3>
+<div class="mb_con">
+<table summary="カレンダー" class="mb_cal">
+<tbody><tr><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr>
+<tr>';
+
+/* 最初の週 */
+for ($i = 0; $i < $cW ; $i++) {  $msg.='<td>-</td>'; } /* 1日までは - 表示*/
+$msg.="\n";
+while(true){
+  $msg.=weeker($cal,$lmsg);
+  $cal->modify('+1 day');  /* 日付 インクリメント */
+  if( $cal->format("w") ==0 ){ $msg.='</tr>'."\n" ; break;} /* 日曜なら初週おわり  */
+}
+
+while(true){  /* 二週目以降 */
+  $msg.="<tr>\n";
+  while(true){ 
+    $msg.= weeker($cal,$lmsg) ;
+    $cal->modify('+1 day');          /* 日付 インクリメント */
+    if( $cal->format("m") != $cM ){  /* 月替わり */
+      while( $cal->format("w") != 0 ){  /* 月末から、週終まで - 埋める */
+        $msg.='<td>-</td>';
+        $cal->modify('+1 day');
+      }
+      break 2; /* break 量注意。 */
+    } 
+    if( $cal->format("w") ==0 ){ $msg.='</tr>'; break;} /* 日曜なら初週おわり  */
+  }
+}
+$msg.='</tr></tbody></table>';
+
+/* カレンダーの下。先月/来月/ 記事あり前月/ 記事あり次月  を作る。 */
+$cal2->modify('-7 day');                 /* 先月。      初日を一週間もどして、年/月利用。 */
+
+$cal3->modify('-1 day');                 /* 記事あり前。 初日を一日もどして、年/月利用。 */
+$pid = search_pcon($cal3, $pdate_str); 
+
+$cal4->modify('+1 month');              /* 記事あり後。 来月の頭にして検索。 */
+$aid = search_acon($cal4, $adate_str);
+
+$msg.='<ul class="mb_cal">';
+$msg.=' <li class="mb_cal"><a href="' . MODX_BASE_URL .'53?M=' . $cal2->format("Y/m")  . '">前の月</a></li>';
+$msg.=' <li class="mb_cal">← →</li>';
+$msg.=' <li class="mb_cal"><a href="' . MODX_BASE_URL .'53?M=' . $cal->format( "Y/m")  . '">次の月</a></li>';
+$msg.='</ul><ul class="mb_cal">';
+if( $pid == 0){
+  $msg.='<li class="mb_cal" style="font-size:x-small" >[過去記事無]</li>';
+}else{
+  $msg.='<li class="mb_cal" style="font-size:x-small" ><a href="' . MODX_BASE_URL .'53?M=' . $pdate_str . '">過去記事月</a></li>';
+} 
+$msg.=' <li class="mb_cal">← →</li>';
+if( $aid == 0){
+  $msg.='<li class="mb_cal" style="font-size:x-small" >[次記事無]</li>';
+}else{
+  $msg.='<li class="mb_cal" style="font-size:x-small" ><a href="' . MODX_BASE_URL .'53?M=' . $adate_str . '">次記事月</a></li>';
+} 
+$msg.='</ul></div></div>';
+
+return $msg ; /*. $lmsg */
+/* --EOT-- */
