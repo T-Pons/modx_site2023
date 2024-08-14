@@ -1,0 +1,73 @@
+[[ShareHtml]]
+
+<H3 class="blog">ShareHtmlモドキ</H3>
+<p>最初「ShareHtmlを、もっと綺麗にしたメーカー」みたいなのが欲しいなと思った。
+<a href="https://manablog.org/sharehtml/" >元ネタはこちら(https://manablog.org/sharehtml/)</a>
+自分のサイトに、同種の機能つけようと思ったはいいんだ。ソースも公開されてたし。
+ところが、動作するサイトが残ってなかったり、PHPで<a href="https://github.com/oscarotero/Embed"> oscarotero/Embed </a>が使われていて、
+依存関係とか、色々面倒だったの。Composerとか面倒だしな。</p>
+<p>それで面倒になっちゃって、ライブラリ使用するのヤメテ、自分でゴリゴリsnippet書いちゃった。<br>
+正直たいした事無いってか、参考になるコードあちこちにあったし。<br>
+ついでに、CSSとHTML分けて処理するのも面倒なんで、全部Styleに押し込んでコピペ一回で済ませる方向に変更。<br>
+角丸めたのは、なんとなく。
+</p>
+
+<p class="text-align: center;">ORG=© 2016 Manabu Bannai.</p>
+<p class="text-align: center;">Chenge=© 2024 T-K.</p>
+<hr>
+
+<div>
+  <div>
+    <div class="text-align: center;">
+      <p>Link Cardを<span >シェアしよう</span></p>
+      <h1>ShareHtmlもどき！</h1>
+      <div style="margin-left: 40px;">
+        <form method="get" accept-charset="utf-8">
+          <input type="text"   name="url" placeholder="ここにURLを入力するだけ。入力例：https://www.google.co.jp/">
+          <input type="submit" value ="送信">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div>
+    <div>
+    <h2 class="bold"># プレビュー</h2>
+
+<!-- プレビュー -->
+<a href="[+ShareHtml_url+]" " target="new"
+ style="box-sizing: border-box; text-decoration: none; text-align: justify; color: rgb(51, 122, 183);background-color: transparent;">
+ <div style="box-sizing: border-box; border: 2px solid rgb(225, 225, 225); border-radius: 0.5em; padding: 10px; display: flex; margin: 30px;">
+   <img alt="[+ShareHtml_title+]"
+    src="[+ShareHtml_thumb+]"
+    style="box-sizing: border-box; width: 200px; height: 200px; float: left; ">
+   <div style="box-sizing: border-box; width: 75%; float: left; padding-left: 20px; line-height: 1.7; margin: 0px; ">
+   <p style="box-sizing: border-box; font-size: 18px; font-weight: 600; color: rgb(66, 139, 202); padding: 0px; margin: 0px; text-align: justify; background: transparent; line-height: 2;">[+ShareHtml_title+]</p>
+     <p style="box-sizing: border-box; color: rgb(123, 123, 123); font-size: 15px; padding: 0px; margin: 0px; text-align: justify; text-rendering: optimizelegibility; background: transparent; line-height: 2;">[+ShareHtml_description+]</p>
+   </div>
+ </div>
+</a>
+
+<!-- 出力 -->
+<h2 class="bold"># HTMLコード</h2>
+<pre style="margin-left: 40px;"><textarea Style="width:80%; height:220px;" >
+&lt;a href="[+ShareHtml_url+]" " target="new" style="box-sizing: border-box; text-decoration: none; text-align: justify; color: rgb(51, 122, 183);background-color: transparent;"&gt; &lt;div style="box-sizing: border-box; border: 2px solid rgb(225, 225, 225); border-radius: 0.5em; padding: 10px; display: flex; margin: 30px;"&gt; &lt;img alt="[+ShareHtml_title+]" src="[+ShareHtml_thumb+]" style="box-sizing: border-box; width: 200px; height: 200px; float: left; "&gt; &lt;div style="box-sizing: border-box; width: 75%; float: left; padding-left: 20px; line-height: 1.7; margin: 0px; "&gt; &lt;p style="box-sizing: border-box; font-size: 18px; font-weight: 600; color: rgb(66, 139, 202); padding: 0px; margin: 0px; text-align: justify; background: transparent; line-height: 2;"&gt;[+ShareHtml_title+]&lt;/p&gt; &lt;p style="box-sizing: border-box; color: rgb(123, 123, 123); font-size: 15px; padding: 0px; margin: 0px; text-align: justify; text-rendering: optimizelegibility; background: transparent; line-height: 2;"&gt;[+ShareHtml_description+]&lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/a&gt;
+</textarea></pre>
+
+
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#text01').focus(function(){
+			$(this).select();
+		});
+		$('#text02').focus(function(){
+			$(this).select();
+		});
+	});
+</script>
+
+<!-- EOT  -->
