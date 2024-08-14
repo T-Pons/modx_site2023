@@ -1,0 +1,153 @@
+/* UTF-8 自作の追加分 CSS */
+@charset "utf-8";
+/*==============================================================================
+ blog向けのhead類。class="blog"
+==============================================================================*/
+h3.blog  {  color: #364e96;  border: solid 3px #364e96;  padding: 0.5em;  border-radius: 0.5em;}/* 青枠 角丸  */
+h4.blog  {  color: #364e96;  border: solid 3px #364e96;  padding: 0.5em;  border-radius: 0.5em;}/* 青枠 角丸  */
+h5.blog  {  color: #364e96;  border: solid 3px #364e96;  padding: 0.5em;  border-radius: 0.5em;}/* 青枠 角丸  */
+
+/*==============================================================================
+H2 高機能head blogclass="blog" #5c9ee7
+==============================================================================*/
+h2.blog {
+ background: #f1f8ff;  padding: 0px; margin: 0px;
+ display: grid; 
+ grid-template-rows:    4px 25px 25px 8px;  
+ grid-template-columns: 25px 50px auto 180px 62px ;
+} 
+span.h2upl   {   grid-column: 1/6;  grid-row:   1; background: #b6e9ff; }
+span.h2unl   {   grid-column: 1/6;  grid-row:   4; background: #b6e9ff; }
+span.h2lfl   {   grid-column: 1;    grid-row: 2/4; background: linear-gradient(to right, #b6e9ff, 30%, #ffffff );  }
+span.h2rtl   {   grid-column: 5;    grid-row: 1/5; background: #b6e9ff; }
+span.h2date  {   grid-column: 2;  grid-row:    2; background: rgb(196, 103, 128); color: rgb(255, 255, 255);   border-radius: 5px 5px 0px 0px; font-size: 10px; text-align: center; line-height: 25px; }
+span.h2year  {   grid-column: 2;  grid-row:    3; background: rgb(228, 136, 152); color: rgb(255, 255, 255);   border-radius: 0px 0px 5px 5px; font-size: 10px; text-align: center; line-height: 25px; }
+span.h2title {   grid-column: 3;  grid-row:    3; font-size: 18px; }
+span.h2memo  {   grid-column: 4;  grid-row:    2; font-size: 12px; border:1px solid black; }
+
+/*
+   吹き出し wordpress jin風 css
+*/
+/* 左右関係ない部分 */
+.clearfix {  clear: both;}
+
+.balloon-box{ position: relative; width:90%; 
+  height: auto; min-height: 105px;
+  overflow: hidden;  padding-bottom: 3px;  } /* for design work  border: 1px solid; */
+
+.balloon-icon{  position: absolute; top: 0px;  overflow: hidden;  width: 80px; height: auto; margin-bottom: 0px;  }
+.balloon-icon img{  width: 80px!important; height: 80px!important;  object-fit: fill!important;  margin-bottom: 0px !important;}
+.icon-name{ width: 80px; top: 85px; font-size: 10px;  }
+.icon-name{ text-align: center;  letter-spacing: 0px; color: rgb(119, 119, 119); }
+.balloon-serif{
+  position: relative;
+  margin: 0px 105px 40px 105px;
+  padding: 0px ;
+}
+/* 
+ align="left" or "right"
+ 灰  rgb(239, 239, 239); rgb(204, 204, 204); off color
+ 赤  rgb(255, 235, 235); rgb(244, 135, 137); red
+ 緑  rgb(209, 248, 194); rgb(157, 221, 147); green
+ 青  rgb(226, 246, 255); rgb(147, 210, 240); blue
+*/
+
+.balloon-bg_o .balloon-content{ background: rgb(239, 239, 239);}
+.balloon-bg_r .balloon-content{ background: rgb(255, 235, 235);}
+.balloon-bg_g .balloon-content{ background: rgb(209, 248, 194);}
+.balloon-bg_b .balloon-content{ background: rgb(226, 246, 255);}
+
+.balloon-right.balloon-bg_o .balloon-serif::before{border-color: transparent transparent transparent rgb(239, 239, 239);}
+.balloon-right.balloon-bg_r .balloon-serif::before{border-color: transparent transparent transparent rgb(255, 235, 235);}
+.balloon-right.balloon-bg_g .balloon-serif::before{border-color: transparent transparent transparent rgb(209, 248, 194);}
+.balloon-right.balloon-bg_b .balloon-serif::before{border-color: transparent transparent transparent rgb(226, 246, 255);}
+.balloon-left.balloon-bg_o  .balloon-serif::before{border-color: transparent rgb(239, 239, 239) transparent transparent;}
+.balloon-left.balloon-bg_r  .balloon-serif::before{border-color: transparent rgb(255, 235, 235) transparent transparent;}
+.balloon-left.balloon-bg_g  .balloon-serif::before{border-color: transparent rgb(209, 248, 194) transparent transparent;}
+.balloon-left.balloon-bg_b  .balloon-serif::before{border-color: transparent rgb(226, 246, 255) transparent transparent;}
+
+.balloon-bc_o .balloon-content{ border-color: rgb(204, 204, 204);}
+.balloon-bc_r .balloon-content{ border-color: rgb(244, 135, 137);}
+.balloon-bc_g .balloon-content{ border-color: rgb(157, 221, 147);}
+.balloon-bc_b .balloon-content{ border-color: rgb(147, 210, 240);}
+ 
+.balloon-right.balloon-bc_o .balloon-serif::after{  border-color: transparent transparent transparent  rgb(204, 204, 204);}
+.balloon-right.balloon-bc_r .balloon-serif::after{  border-color: transparent transparent transparent  rgb(244, 135, 137);}
+.balloon-right.balloon-bc_g .balloon-serif::after{  border-color: transparent transparent transparent  rgb(157, 221, 147);}
+.balloon-right.balloon-bc_b .balloon-serif::after{  border-color: transparent transparent transparent  rgb(147, 210, 240);}
+.balloon-left.balloon-bc_o  .balloon-serif::after{  border-color: transparent rgb(204, 204, 204) transparent transparent;}
+.balloon-left.balloon-bc_r  .balloon-serif::after{  border-color: transparent rgb(244, 135, 137) transparent transparent;}
+.balloon-left.balloon-bc_g  .balloon-serif::after{  border-color: transparent rgb(157, 221, 147) transparent transparent;}
+.balloon-left.balloon-bc_b  .balloon-serif::after{  border-color: transparent rgb(147, 210, 240) transparent transparent;}
+
+.balloon-content {
+  position: relative;
+  padding: 10px; /* 元の 1.15rem =18pxでかすぎ  margin:0px 105px 40px 105pxは親の仕事 */
+  margin: 0px ; 
+  line-height: 1.5rem;
+  border: 2px solid;
+  border-radius: 6px;
+  font-size: 0.95em;
+  z-index: 2;
+}
+
+/* 三角を二個重ねてる！
+   right と left とbefore after で4種類設定が必要 
+*/
+.balloon-right .icon-name {     right: 0px;}
+.balloon-right .balloon-icon {  right: 0px;}
+.balloon-left  .icon-name {     left:  0px;}
+.balloon-left  .balloon-icon {  left:  0px;}
+
+.balloon-right .balloon-serif::before {
+  top: 16px; content: "";
+  position: absolute; right: -7px;
+  display: block; 
+  width: 0px;  height: 0px;  border-style: solid;  border-width: 7px 0px 7px 10px;
+  z-index: 3;
+}
+
+.balloon-right .balloon-serif::after {
+  top: 15px; content: "";
+  position: absolute;  right: -10px;
+  display: block;   
+  width: 0px;  height: 0px;  border-style: solid;  border-width: 8px 0px 8px 10px;
+  z-index: 2;
+}
+
+.balloon-left  .balloon-serif::before {
+  top: 16px; content: "";
+  position: absolute; left: -7px;
+  display: block;
+  width: 0px; height: 0px; border-style: solid; border-width: 7px 10px 7px 0px;
+  z-index: 3;
+}
+
+.balloon-left .balloon-serif::after {
+  top: 15px;   content: "";  position: absolute;  left: -10px;
+  display: block;
+  width: 0px;  height: 0px;  border-style: solid; border-width: 8px 10px 8px 0px;
+  z-index: 2;
+}
+/*==============================================================================
+アコーディオン用 +/-とトグル。
+==============================================================================*/
+/*  color: #8090A3; */
+.ac_block {
+  padding: 5px 10px;
+  border: 1px solid black; padding: 5px 10px;
+}
+.ac_collapsed, .ac_expanded {
+/*  color: #8090A3; */
+  cursor: pointer;
+  position: relative;
+  padding: 5px 10px;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+/* 順序大切。+が先 －を後 */
+.ac_collapsed { background-image: url('http://tachikawa413.starfree.jp/modx/content/images/plus.gif' )!important}
+.ac_expanded  { background-image: url('http://tachikawa413.starfree.jp/modx/content/images/minus.gif')!important}
+
+
+/* EOT */
