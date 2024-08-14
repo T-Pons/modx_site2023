@@ -44,9 +44,8 @@ phpinfoは通常停止されてるので、動作しない方が普通の環境�
 調査用。急場で実体参照とか判らん場合に、これに渡して表示させて見ると、早かったり。
 
 ### ページリンク
-プレースホルダーとテンプレートの利用例？
-
-### ページリンク
+OGPの試作日菜。ShareHtmlの方が完成型。
+ただ、プレースホルダーとテンプレートのテストとして意味が残ってるので単品でも残し。
 
 ### 単体機能
 ヘッダでscript読み込む奴が多い。
@@ -74,6 +73,7 @@ FaceBookやtwitter、blogでのbox式リンク等で使われるやつ。
 実は、meta社facebookは、headの頭2KB以内に無いとまともに動作しない謎ルールがある。
 （しかも、資料やVerによって違う！）
 regClientStartupHTMLBlockでの出力は使えない(javascriptなど読み込むと、2KBなんて突破しちまう。)
+ページリンク.sniはここの試作。ShareHtmlの方が完成型。
 
 ####  in_template_OGP
 スニペットだが、テンプレート内に配置して使う。
@@ -87,7 +87,6 @@ regClientStartupHTMLBlockでの出力は使えない(javascriptなど読み込�
 #### ShareHtml(snippet)+(content 170)ShareHtmlを、もっと綺麗にしたメーカー
 よそ様のページのOGPを読み取り、カード形式で表示する。
 公開ページというより、自分で利用して、html手に入れる感じ。
-
 
 ### image-compare-viewer関連
 画像比較。完成品こそ一個だが、苦戦したので中途も残す。デバック方法の参考で
