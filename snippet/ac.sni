@@ -1,0 +1,68 @@
+/* 
+アコーディオンSnippet
+ページ頭で{{ac}} チャンク配置(javascript)
+利用法は [ [ac?title="タイトル"&msg="ほにゃら"] ]
+もちろんネストがやりたい
+*/
+
+/*
+ ( ( ) ) を検索して [ [ ] ]に置き換える。
+ 置き換えたら evalSnippetする。
+*/
+$all_rep = function( $stext )
+{
+  $pos_search = function($stext, &$pos1, &$pos2){
+    $spos = mb_strrpos($stext, "((" );
+    if( $spos ==false ){ return false ;}
+
+    $epos = mb_strpos( $stext, "))", $spos);
+    if( $epos ==false ){ return false ;}
+
+    $pos1 = $spos;
+    $pos2 = $epos;
+    return true;
+  };
+
+  $pos1 = 0;
+  $pos2 = 0;  
+
+  while(1){
+    $ret = $pos_search($stext , $pos1 , $pos2 );
+    if( ! $ret ){
+      /* printf("not found!\n"); */
+      return $stext;
+    }
+    /* printf( "find[1:%d][2:%d]\n" , $pos1, $pos2 ); */
+
+    $a = mb_substr($stext, 0,        $pos1        );
+    $b = mb_substr($stext, $pos1+2 , $pos2-$pos1-2);
+    $c = mb_substr($stext, $pos2+2                );
+
+    $d = str_replace('--', '\'', $b);
+    $e = evo()->evalSnippets($d);
+
+    $f = $a . "[[" . $e . "]]" . $c; 
+    /* print_r( $f ."\n" ); */
+
+    $stext = $f;
+    /* return $stext; 動作検証用。再起を止める。バグると止まらなくなるし */
+  }
+};
+
+
+if( !isset($title)  ) $title=" ";
+if( !isset($msg)    ) $msg=" ";
+
+/*
+ 先にネストを扱う。
+ 再起呼び出しが発生するため、関数の多重定義が発生しそうだから、
+ わざわざ無名関数にした。
+*/
+ $msg2 = $all_rep( $msg );
+
+$out='
+<div class="ac_block"><span class="ac_collapsed"  onclick="ac_on(this)" >' . $title . '</span>
+<div style="display: none;">' . $msg2 . '</div></div>';
+
+return $out;
+/* EOF */
