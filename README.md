@@ -83,7 +83,12 @@ regClientStartupHTMLBlockでの出力は使えない(javascriptなど読み込�
 
 #### test_OGP_固定 
 こちらも試験用で残ってる。いろんな値を足して、挙動を見てただけ。(バックアップすら不要？)
- 
+
+#### ShareHtml(snippet)+(content 170)ShareHtmlを、もっと綺麗にしたメーカー
+よそ様のページのOGPを読み取り、カード形式で表示する。
+公開ページというより、自分で利用して、html手に入れる感じ。
+
+
 ### image-compare-viewer関連
 画像比較。完成品こそ一個だが、苦戦したので中途も残す。デバック方法の参考で
 
