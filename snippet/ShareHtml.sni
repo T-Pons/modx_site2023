@@ -1,0 +1,93 @@
+/*
+  ShareHtmlを、もっと綺麗にしたメーカー。
+  単純にplaceHolderを代入しとくだけ。
+ 
+*/
+
+/*
+from   https://hsmt-web.com/blog/open-graph-protcol/
+*/
+function get_ogp( $url , &$ogp ){
+  $ch = curl_init($url);// urlは対象のページ
+  curl_setopt($ch, CURLOPT_HEADER, 0);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);// exec時に出力させない
+  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);// リダイレクト許可
+  curl_setopt($ch, CURLOPT_MAXREDIRS, 5);// 最大リダイレクト数
+  $html = curl_exec($ch);
+  $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  curl_close($ch);
+
+  //リンク先がないとき(404のとき)は処理しない
+  if( $status_code == 404 ){ return ' ';  }
+
+  $dom_document = new DOMDocument();
+  $from_encoding = mb_detect_encoding($html, ['ASCII', 'ISO-2022-JP', 'UTF-8', 'EUC-JP', 'SJIS'], true);
+  if ( ! $from_encoding){   $from_encoding = 'SJIS';  }
+  @$dom_document->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', $from_encoding));
+  $xml_object = simplexml_import_dom($dom_document);
+
+  //title
+  if( $xml_object->xpath('//meta[@property="og:title"]/@content')[0] ){
+      $ogp["title"][] = (string)$xml_object->xpath('//meta[@property="og:title"]/@content')[0];
+  }else if( $xml_object->xpath('//title')[0] ){
+      $ogp["title"][] = (string)$xml_object->xpath('//title')[0];
+  }
+
+  //description
+  if( $xml_object->xpath('//meta[@property="og:description"]/@content')[0] ){
+    $ogp["description"][] = (string)$xml_object->xpath('//meta[@property="og:description"]/@content')[0];
+  }else if( $xml_object->xpath('//meta[@name="description"]/@content')[0] ){
+    $ogp["description"][] = (string)$xml_object->xpath('//meta[@name="description"]/@content')[0];
+  }
+
+  //thumbnail
+  if( $xml_object->xpath('//meta[@property="og:image"]/@content')[0] ){
+      $ogp["thumbnail"][] = (string)$xml_object->xpath('//meta[@property="og:image"]/@content')[0];
+  }else if( $xml_object->xpath('//meta[@name="thumbnail"]/@content')[0] ){
+      $ogp["thumbnail"][] = (string)$xml_object->xpath('//meta[@name="thumbnail"]/@content')[0];
+  }else{
+      $ogp["thumbnail"][] = "http://tachikawa413.starfree.jp/modx/manager/content/images/No_Image_Icon.png";
+  }
+  return ''; /* $out; */
+}
+
+
+$red_err =  MODX_BASE_URL .'170?url=http://localhost/' ;
+$id       = $modx->documentObject['id'];
+$host     = $_SERVER['HTTP_HOST'];
+$request  = $_SERVER['REQUEST_URI'];
+$request2 = $request;
+
+$acc_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $host . $request2;
+$a = parse_url( $acc_url );
+parse_str( $a['query'], $url_query );
+
+/*
+$msg .= '[parse:' . print_r($a,true)         . ']<br>' ;
+$msg .= '[url:'   . print_r($url_query,true) . ']<br>' ;
+
+if( count($url_query ,COUNT_RECURSIVE) > 0 ){
+   $msg .= '[anser:' . $url_query['url']          . ']<br>' ;
+}
+*/
+if( count($url_query ,COUNT_RECURSIVE) == 0 ){
+  // URL指定なしなら、空にしとく
+  $modx->setPlaceholder( 'ShareHtml_url'         , ''  ); // 取得対象 URL
+  $modx->setPlaceholder( 'ShareHtml_title'       , ''  ); // タイトルを取得
+  $modx->setPlaceholder( 'ShareHtml_description' , ''  ); // ディスクリプションを取得
+  $modx->setPlaceholder( 'ShareHtml_thumb'       , ''  ); // 画像を取得 無かったら固定URL
+  return '';
+}
+
+// URLを読み込む   
+$ogp = [];
+$info = get_ogp( $url_query['url'] , $ogp);
+
+$modx->setPlaceholder( 'ShareHtml_url'         , $url_query['url']         ); // 取得対象 URL
+$modx->setPlaceholder( 'ShareHtml_title'       , $ogp["title"][0]          ); // タイトルを取得
+$modx->setPlaceholder( 'ShareHtml_description' , $ogp["description"][0]    ); // ディスクリプションを取得
+$modx->setPlaceholder( 'ShareHtml_thumb'       , $ogp["thumbnail"][0]      ); // 画像を取得 無かったら固定URL
+
+
+return "";
+/* ==EOT== */
