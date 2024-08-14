@@ -1,0 +1,121 @@
+/*
+ UTF-8 自作の簡単CSS 
+*/
+/* 上部固定ヘッダー */
+.top_float {
+position: fixed; /* ヘッダーを固定する */
+top: 0; left: 0; /* 起点は左上 */
+width: 100%; /*横幅いっぱい */
+height: 89px; /* ヘッダーの高さを指定する 偶数に変更 */
+padding: 0px; /* ヘッダーの余白を指定する(上下左右) */
+margin:  0px; /* ヘッダー要素の隙間 */
+background-color: #31a9ee; /* ヘッダーの背景色を指定する */
+color: #000000; /* フォントの色を指定する */
+z-index: 999;
+} 
+/* 右メニュー */
+.right_float {
+position: fixed; /* ヘッダーを固定する */
+top: 92px; right: 24px; /* 起点は右上から92px下 */
+width: 450px; /*横幅いっぱい */
+height: 92%; /* ヘッダーの高さを指定する */
+padding: 0px; /* ヘッダーの余白を指定する(上下左右) */
+background-color: #808080; /* ヘッダーの背景色を指定する */
+color: #000000; /* フォントの色を指定する */
+} 
+/* 右メニュー2 */
+.right_float2 {
+position: fixed; /* ヘッダーを固定する */
+top: 92px; right: 24px; /* 起点は右上から92px下 */
+width: 350px; /*横幅いっぱい */
+height: 92%; /* ヘッダーの高さを指定する */
+padding: 0px; /* ヘッダーの余白を指定する(上下左右) */
+background-color: #808080; /* ヘッダーの背景色を指定する */
+color: #000000; /* フォントの色を指定する */
+} 
+/* Css Grid */
+#mw-container {
+    display: grid;
+    background: rgb(220, 229, 179);
+    grid-template-rows:     84px   1fr 140px;   
+    grid-template-columns:  30px 250px  1fr 70px   30px;
+    grid-template-areas:
+        ".  mw_header mw_link   mw_link   . "
+        ".  mw_body   mw_body   .         . "
+        ".  mw_footer mw_footer mw_footer . ";
+}
+
+/* UTF-8 */
+mw-humber{
+    grid-area: mw_humber;
+    background: rgb(241, 97, 207);
+}
+mw-header{
+    grid-area: mw_header;
+    background: #f88;
+}
+mw-link{
+    grid-area: mw_link;
+    background: rgb(178, 222, 243);
+    text-align: right;
+}
+mw-link div{
+    height:100%;
+    background-image: url("top_menu_bg.png");
+    background-size:cover;
+}
+mw-body{
+    grid-area: mw_body;
+    background: #8f8;
+}
+mw-footer{
+    grid-area: mw_footer;
+    background: #88f;
+};
+mw-footer ul{
+    display: inline-block;
+}
+mw-footer li{
+    list-style: none;
+    display: inline-block;
+}
+/* 右上メニュー */
+#mw-head-menu-rt{
+    margin-top:  8px;
+    max-width: 800px;
+    float: right;
+}
+#mw-head-menu-rt ul {
+    display: inline-block;
+}
+#mw-head-menu-rt li {
+    list-style: none;
+    display: inline-block;
+/*    display: list-item;
+    text-align: -webkit-match-parent;  */
+}
+/* 下フロートブロック */
+#campaignFix{
+    background: rgb(216, 44, 136);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2147483646;
+}
+/*
+ ここからサイトのデザインではなく、便利使い用機能
+*/
+.nodisplay div{  style="display:none;" ;} /* コメント用途というより、データを埋め込むのに使う。 */
+
+/*  gallary CSS */
+.gallary_box div{
+    float: left;
+    max-width: 250px;
+    max-hight: 250px;
+    border: 10px ridge #31A9EE;
+}
+.gallary_img div{ border: 1px solid black; }
+.gallary_img img{ max-width: 210px; max-hight: 210px;}
+.gallary_box p{ float: none; clear: both; }
+/* EOT */
