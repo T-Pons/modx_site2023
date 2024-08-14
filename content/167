@@ -1,0 +1,31 @@
+<H3 class="blog" >CodePenの利用</H3>
+
+[[Textile? &msg='
+おなじみコードペンを貼り付ける試験
+
+これは実質必須みたいなもんだし。
+
+とくにcssやHTMLの試験をする際には、「無いと泣いちゃう」レベル
+
+']]
+
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="jOoEyRZ" data-user="kino-taku" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/kino-taku/pen/jOoEyRZ">
+  Modx用アコーディオンの試験</a> by kino taku (<a href="https://codepen.io/kino-taku">@kino-taku</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+<H3 class="blog" >実際の貼り付け作業</H3>
+[[Textile? &msg='
+Codepen側の操作は、問題なく出来るのが前提。
+
+その上で、右下[Embet]から、画面サイズや表示対象を選択して、コピペ。
+
+とくに難しくもなし。
+
+1ページに複数Codeも問題なく貼れる
+
+']]
+
+
