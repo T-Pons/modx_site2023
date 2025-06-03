@@ -1,4 +1,5 @@
-# modx_site2023
+# modx_site
+since 2023-2025
 ## 概要
 test site fot modx
 2023年度版のMODXテストサイトのバックアップ。
