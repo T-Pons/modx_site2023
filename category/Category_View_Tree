@@ -1,0 +1,82 @@
+/* 
+ 元ネタ＝https://iamkate.com/code/tree-views/ 
+ CordPen用なので、<body>の外は殺してある。
+*/
+
+.tree { }
+.tree li {  display: block;  position: relative;  padding-left: calc(3rem - 12px);}
+.tree ul { margin-left: calc(10px + 1.5rem);  padding-left: 0;}
+.tree ul li {  border-left: 2px solid #ddd;}
+.tree ul li:last-child { border-color: transparent;}
+.tree ul li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -0.75rem;
+  left: -2px;
+  width: calc(1.5rem + 2px);
+  height: calc(1.5rem + 1px);
+  border: solid #ddd;
+  border-width: 0 0 2px 2px;
+}
+.tree summary {  display: block;  cursor: pointer;}
+.tree summary::marker,
+.tree summary::-webkit-details-marker {  display: none;}
+.tree summary:focus {  outline: none;}
+.tree summary:focus-visible {  outline: 1px dotted #000;}
+.tree li::after,
+.tree summary::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(0.75rem - 10px);
+  left: calc(1.5rem - 11px);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ddd;
+}
+ 
+.tree summary::before {
+  content: "+";
+  z-index: 1;
+  line-height: 18px;
+}
+.tree details[open] > summary::before {  content: "−";}
+
+#mb_cat_flame { 
+  border: 2px solid Black;
+  border-radius: 20px;
+  width: 500px;
+}
+/* top: 30px;  bottom: 30px;  left: 30px;  width: 30px; */
+
+
+
+<!-- DOCTYPE html>
+<html lang="ja">
+ <head>
+   <meta charset="UTF-8">
+   <title>Category html test</title>
+</head >
+<body -->
+<div id="mb_cat_flame"><div class="tree">
+<ul> 
+ <details open><summary>Category一覧</summary>
+ <ul>
+  <li><a href="">category_1st</a>--(1)</li>
+  <li><a href="">category_2nd</a>--(1)</li>
+  <li><a href="">cat_1st</a>--(4)</li>
+  <details><summary><a href="">category_3rd</a>--(4)</summary>
+  <ul>
+   <li><a href="">test</a>--(2)</li>
+   <li><a href="">test2</a>--(1)</li>
+  </ul>
+  </details>
+ <li><a href="">category_4th</a>--(1)</li>
+ <li><a href="">category_5</a>--(1)</li>
+ <li><a href="">category_6</a>--(1)</li>
+</ul></details></ul>
+</div></div>
+<!-- /body>
+</html -->
